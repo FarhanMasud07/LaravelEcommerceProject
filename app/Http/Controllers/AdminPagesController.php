@@ -36,7 +36,8 @@ class AdminPagesController extends Controller
 
     public function store(Request $request){
       
-
+          ///For store ////
+            
         $product = new Product;
      
         $product->title = $request->title;
