@@ -1,0 +1,1 @@
+<a href="{{ URL::to('administration/create') }}" class="btn btn-danger">Add product</a>
