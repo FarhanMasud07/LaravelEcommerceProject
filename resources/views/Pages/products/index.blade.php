@@ -1,16 +1,7 @@
 @extends('pages.navbar')
 
 @section('content')
-   <!-- @foreach($products as $product)
-        {{$product->title}}
-        {{$product->category_id}}
-        {{$product->brand_id}}
-        {{$product->description}}
-        {{$product->slug}}
-        {{$product->quantity}}
-        {{$product->price}}
-   @endforeach -->
-
+  
 
     
    
@@ -112,7 +103,7 @@
             @foreach($product->images as $image)
 
                @if($i>0)
-                  <a class="product-thumb" href="shop-single.html"><img src="{{asset('upload/productspic/'.$image->image)}}" alt="Product"></a>
+                  <a class="product-thumb" href="shop-single.html"><img style="height:200px;width:200px;" src="{{asset('upload/productspic/'.$image->image)}}" alt="Product"></a>
                @endif
 
                @php $i--; @endphp

@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Fontend;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Product;
+use App\Models\Product;
 
 class PageController extends Controller
 {

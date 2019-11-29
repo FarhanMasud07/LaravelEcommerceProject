@@ -15,7 +15,7 @@
 //     return view('welcome');
 // });
 
-Route::get('/','PageController@products')->name('products');
+Route::get('/','Fontend\PageController@products')->name('products');
 
 // Route::group(['prefix' => 'administration'],function(){
 //     Route::get('/','AdminPagesController@index')->name('admin.index');
@@ -23,4 +23,12 @@ Route::get('/','PageController@products')->name('products');
 //     Route::post('/product/store','AdminPagesController@product_store');
 // });
 
-Route::resource('/administration','AdminPagesController');
+
+                /////// For Admin ///////
+
+Route::resource('/administration','Backend\AdminPagesController');
+
+
+                /////// For AdminCategory ///////
+                
+Route::resource('/Category','Backend\CategoryController');

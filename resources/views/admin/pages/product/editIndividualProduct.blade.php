@@ -40,8 +40,9 @@
                             </div>
                     @endif
 
-                        <form action="{{URL::to('administration')}}"  enctype="multipart/form-data" id="form_sample_1" class="form-horizontal" method = "post"  >
-                          @csrf 
+                        <form action="{{URL::to('administration/'.$products->id)}}"  enctype="multipart/form-data" id="form_sample_1" class="form-horizontal" method = "post"  >
+                          @csrf
+                          @method('PUT') 
                             
                             <div class="form-body">
                                 <div class="form-group row">
@@ -50,7 +51,7 @@
                                         <span class="required"> * </span>
                                     </label>
                                     <div class="col-md-5">
-                                        <input type="text" name ="title"  placeholder="Title"
+                                        <input type="text" name ="title" value="{{$products->title}}" placeholder="Title"
                                                class="form-control input-height" />
                                     </div>
                                     <span  class="text-danger"></span>
@@ -61,17 +62,11 @@
                                         <span class="required"> * </span>
                                     </label>
                                     <div class="col-md-5">
-                                        <textarea type="text" name ="description" rows ="8" cols = "80"  placeholder="Description">
+                                        <textarea type="text" name ="description" rows ="8" cols = "80"  placeholder="Description">{{$products->description}}
                                         </textarea>
                                     </div>
                                     <span  class="text-danger"></span>
                                 </div>
-
-
-
-
-
-                                
 
 
                                 <div class="form-group row">
@@ -80,7 +75,7 @@
                                         <span class="required"> * </span>
                                     </label>
                                     <div class="col-md-5">
-                                        <input type="text" name="quantity" placeholder="Quantity"
+                                        <input type="text" name="quantity" value="{{$products->quantity}}" placeholder="Quantity"
                                                class="form-control input-height" />
                                     </div>
                                     <span class="text-danger"></span>
@@ -92,7 +87,7 @@
                                         <span class="required"> * </span>
                                     </label>
                                     <div class="col-md-5">
-                                        <input type="text" name ="price" placeholder="Price"
+                                        <input type="text" name ="price" value="{{$products->price}}" placeholder="Price"
                                                class="form-control input-height" />
                                     </div>
                                     <span  class="text-danger"></span>
@@ -106,18 +101,30 @@
                                         <span class="required"> * </span>
                                     </label>
                                     <div class="col-md-5">
-                                        <input  type="text" name="status" placeholder="Status"
+                                        <input  type="text" name="status" value="{{$products->status}}" placeholder="Status"
                                                class="form-control input-height" />
                                     </div>
                                     <span  class="text-danger"></span>
                                 </div>
 
-                                <div class="form-group row">
-												<label class="control-label col-md-3">Product Picture
-												</label>
-												<div >
-													<input type="file" class="default" name ="image" >
-									           </div>
+                                <div class="form-group ">
+									<label class="control-label col-md-3">Product Picture
+									 </label>
+									<div class = "row">
+                                    
+                                        <div class="col-md-4">
+                                           <input type="file"    name ="image[]" >
+                                        </div>
+
+                                        <div class="col-md-4">
+                                           <input type="file" value="{{$products->image}}"  name ="image[]" >
+                                        </div>
+
+                                       
+											
+									</div>
+
+                                 
 								</div>
 
                                
@@ -129,7 +136,7 @@
                                         <div class="offset-md-3 col-md-9">
                                             <button type="submit"
                                                     class="btn btn-info m-r-20">
-                                                Add Product
+                                                Update Product
                                             </button>
                                             <a  class="btn btn-outline-primary">CANCEL</a>
                                         </div>
