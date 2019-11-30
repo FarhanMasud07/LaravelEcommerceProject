@@ -50,7 +50,7 @@
                                         <span class="required"> * </span>
                                     </label>
                                     <div class="col-md-5">
-                                        <input type="text" name="title" value="{{$category->name}}" placeholder="Title" class="form-control input-height" />
+                                        <input type="text" name="name" value="{{$category->name}}"  class="form-control input-height" />
                                     </div>
                                     <span class="text-danger"></span>
                                 </div>
@@ -75,8 +75,9 @@
 
                                     <div class="col-md-5">
                                         <select name="parent_id">
+                                        <option value="">Please Select a Primamry Category</option>
                                             @foreach($main_categories as $cat)
-                                            <option value="{{$cat->id}}">{{$cat->name}}</option>
+                                            <option value="{{$cat->id}}" {{ $cat->id == $category->parent_id ? 'selected' : ''}}>{{$cat->name}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -95,7 +96,7 @@
 
 
                                     <div class="col-md-4">
-                                        <input type="file" value="{{$category->image}}" name="image">
+                                        <input type="file" name="image">
                                     </div>
 
                                 </div>
@@ -108,7 +109,7 @@
                                     <div class="row">
                                         <div class="offset-md-3 col-md-9">
                                             <button type="submit" class="btn btn-info m-r-20">
-                                                Update Product
+                                                Update Category
                                             </button>
                                             <a class="btn btn-outline-primary">CANCEL</a>
                                         </div>
