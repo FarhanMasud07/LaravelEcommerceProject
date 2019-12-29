@@ -52,6 +52,8 @@ class AdminPagesController extends Controller
             'quantity' => 'required',
             'price' => 'required',
             'status' => 'required',
+            'category_id' => 'required',
+            'brand_id' => 'required',
 
         ]);
 
@@ -67,10 +69,11 @@ class AdminPagesController extends Controller
 
 
 
-        $product->category_id = 1;
-        $product->brand_id = 1;
+        $product->category_id = $request->category_id;
+        $product->brand_id = $request->brand_id;
         $product->admin_id = 1;
-        $product->slug = 'samsung-gal';
+        $product->slug = preg_replace('/[^A-Za-z0-9-]+/', '-', $request->title);
+        //gen_slug($request->title);
 
 
 
@@ -89,7 +92,7 @@ class AdminPagesController extends Controller
                 // $image = $request->file('image');
                 $extention = $image->getClientOriginalExtension();
 
-                $filename = time() . '.' . $extention;
+                $filename = rand() . '.' . $extention;
                 $image->move('upload/productspic/', $filename);
 
 
@@ -111,25 +114,30 @@ class AdminPagesController extends Controller
         return Redirect()->back()->with($notification);
     }
 
-    public function show($id){
+    public function show($id)
+    {
         $singleproductview = Product::find($id);
-        return view('admin.pages.product.ShowIndividualProduct')->with('singleproductview',$singleproductview);
+        return view('admin.pages.product.ShowIndividualProduct')->with('singleproductview', $singleproductview);
     }
 
-    public function edit($id){
+    public function edit($id)
+    {
         $product = Product::find($id);
         return view('admin.pages.product.editIndividualProduct')->with('products', $product);
     }
 
-    public function update(Request $request,$id){
+    public function update(Request $request, $id)
+    {
 
-        
+
         $validatedData = $request->validate([
             'title' => 'required',
             'description' => 'required',
             'quantity' => 'required',
             'price' => 'required',
             'status' => 'required',
+            'category_id' => 'required',
+            'brand_id' => 'required',
 
         ]);
 
@@ -140,6 +148,8 @@ class AdminPagesController extends Controller
         $product->quantity = $request->quantity;
         $product->price = $request->price;
         $product->status = $request->status;
+        $product->category_id = $request->category_id;
+        $product->brand_id = $request->brand_id;
 
 
 
@@ -172,33 +182,33 @@ class AdminPagesController extends Controller
         //         $productimage->save();
         //     }
 
-            $notification = array(
-                'messege' => 'Succcessfully Updated',
-                'alert-type' => 'success'
-            );
+        $notification = array(
+            'messege' => 'Succcessfully Updated',
+            'alert-type' => 'success'
+        );
 
-            return Redirect()->to('administration')->with($notification);
+        return Redirect()->to('administration')->with($notification);
 
-            //return response()->json($productimage);
+        //return response()->json($productimage);
 
 
         //}
 
     }
 
-    public function destroy($id){
+    public function destroy($id)
+    {
         $deleteIndividualproduct = Product::find($id);
-        
-        if(!is_null($deleteIndividualproduct)){
+
+        if (!is_null($deleteIndividualproduct)) {
             $deleteIndividualproduct->delete();
         }
-        
+
         $notification = array(
             'messege' => 'Succcessfully Deleted',
             'alert-type' => 'success'
         );
 
         return Redirect()->to('administration')->with($notification);
-
     }
 }

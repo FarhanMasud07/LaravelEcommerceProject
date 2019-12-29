@@ -107,6 +107,40 @@
                                     <span  class="text-danger"></span>
                                 </div>
 
+                                <div class="form-group row">
+                                    <label class="control-label col-md-3">
+                                        Select Category
+                                        <span class="required"> * </span>
+                                    </label>
+                                    <select class="form-control" name="category_id">
+                                        <option value="">Please select a category for product</option>
+                                        @foreach(App\Models\Category::orderBy('name','asc')->where('parent_id',NULL)->get() as $parent)
+                                        <option value="{{$parent->id}}"{{$parent->id==$products->category->id ? 'selected' : ''}}>{{$parent->name}}</option>
+                                        @endforeach
+
+                                        @foreach(App\Models\Category::orderBy('name','asc')->where('parent_id',$parent->id)->get() as $child)
+                                        <option value="{{$child->id}}" {{$child->id==$products->category->id ? 'selected' : ''}}>---->{{$child->name}}</option>
+                                        @endforeach
+                                    </select>
+                                    <span class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="control-label col-md-3">
+                                        Select Brand
+                                        <span class="required"> * </span>
+                                    </label>
+                                    <select class="form-control" name="brand_id">
+                                        <option value="">Please select a Brand for product</option>
+                                        @foreach(App\Models\Brand::orderBy('name','asc')->get() as $br)
+                                        <option value="{{$br->id}}" {{$br->id == $products->brand->id ? 'selected' : ''}}>{{$br->name}}</option>
+
+                                        @endforeach
+                                    </select>
+                                    <span class="text-danger"></span>
+                                </div>
+
+
                                 <div class="form-group ">
 									<label class="control-label col-md-3">Product Picture
 									 </label>

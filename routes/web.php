@@ -15,7 +15,11 @@
 //     return view('welcome');
 // });
 
-Route::get('/','Fontend\PageController@products')->name('products');
+//Route::get('/','Fontend\PageController@products')->name('products');
+
+Route::resource('/product', 'Fontend\PageController');
+
+Route::resource('/shop', 'Fontend\ProductController');
 
 // Route::group(['prefix' => 'administration'],function(){
 //     Route::get('/','AdminPagesController@index')->name('admin.index');
@@ -24,11 +28,24 @@ Route::get('/','Fontend\PageController@products')->name('products');
 // });
 
 
-                /////// For Admin ///////
+/////// For Admin ///////
 
-Route::resource('/administration','Backend\AdminPagesController');
+Route::resource('/administration', 'Backend\AdminPagesController');
 
 
-                /////// For AdminCategory ///////
-                
-Route::resource('/Category','Backend\CategoryController');
+/////// For AdminCategory ///////
+
+Route::resource('/Category', 'Backend\CategoryController');
+
+/////// For Brand ///////
+Route::resource('/Brand', 'Backend\BrandController');
+
+Route::resource('/categories', 'Fontend\CategoryController');
+
+Route::resource('/cart', 'Fontend\CartController');
+
+Route::resource('/checkout', 'Fontend\CheckoutController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

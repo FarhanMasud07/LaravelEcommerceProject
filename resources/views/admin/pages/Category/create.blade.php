@@ -84,7 +84,6 @@
                                     <span class="text-danger"></span>
                                 </div>
 
-                              
 
                                 <div class="form-group row">
                                     <label class="control-label col-md-3">Category Picture
